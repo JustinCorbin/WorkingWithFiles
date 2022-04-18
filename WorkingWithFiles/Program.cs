@@ -17,7 +17,15 @@ namespace WorkingWithFiles
         // .Trim() might be useful in this situation.
         public static int WordCount(string fileName)
         {
-            return default;
+            string[] strWords;
+            StreamReader strRead = new StreamReader(fileName);
+            int intWords = 0;
+            while(strRead.Peek() != -1)
+            {
+                strWords = strRead.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                intWords += strWords.Length;
+            }
+            return intWords;
         }
 
         // 2- Write a method that reads a text file and returns the longest word in the file. Ex.
@@ -26,7 +34,29 @@ namespace WorkingWithFiles
         // .Trim() might be useful in this situation.
         public static string LongestWord(string fileName)
         {
-            return default;
+            string strMax = "";
+            string[] strWords;
+            StreamReader strRead = new StreamReader(fileName);
+            while(strRead.Peek() != -1)
+            {
+                strWords = strRead.ReadLine().Split(' ');
+                foreach (string str in strWords)
+                {
+                    if (str.Length > strMax.Length)
+                    {
+                        strMax = str;
+                    }
+                }
+            }
+            
+            if (strMax == "")
+            {
+                return "File is Empty";
+            }
+            else
+            {
+                return strMax;
+            }
         }
     }
 
